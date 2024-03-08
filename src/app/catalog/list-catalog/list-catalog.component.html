@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-8">
+      <h3 class="display-6"> Course Catalog</h3>
+    </div>
+    <div class="col-4 d-flex justify-content-end mr-2">
+      <button id="courseModalBtn" type="button" class="btn btn-outline-info styleIcon mt-2" data-bs-toggle="modal" data-bs-target="#courseModal"><i class="fa-solid fa-plus"></i></button>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <custom-grid [list]="courses" (selectCourseToEdit)="openEditModal($event)"></custom-grid>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #courseModal>
+   <custom-modal [selectedCourse]="selectedCourseToEdit"></custom-modal>
+</div>
+

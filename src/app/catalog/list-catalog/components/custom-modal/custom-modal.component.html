@@ -1,0 +1,95 @@
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Course</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCancel()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onSave()" autocomplete="off">
+
+        <div class="row">
+            <div class="col-4">
+              <div class="mb-2">
+                <label class="form-label">Course Name</label>
+                <input type="text" class="form-control" formControlName="courseName">
+                <span *ngIf="isValidField('courseName')" class="form-text text-danger">
+                  Course Name is required.
+                </span>
+              </div>
+              <div class="mb-2">
+                <label  class="form-label">Room Number</label>
+                <input type="text" class="form-control" formControlName="roomNumber">
+              </div>
+          </div>
+
+          <div class="col-4">
+            <div class="mb-2">
+              <label class="form-label">Professor Name</label>
+              <input type="text" class="form-control"formControlName="professorName">
+            </div>
+            <div class="mb-2">
+              <label  class="form-label">Professor Email</label>
+              <input type="email" class="form-control" formControlName="professorEmail">
+              <span *ngIf="isValidField('professorEmail')" class="form-text text-danger">
+                Invalid email.
+              </span>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <p>Day Course Rounds</p>
+            <div class="form-group" formGroupName="daysCheckboxGroup">
+              <div class="row">
+                <div class="custom-control form-check col-6">
+                  <input type="checkbox" class="form-check-input" formControlName="sundayChk" id="sundayChk">
+                  <label class="form-check-label" for="sundayChk">Sunday</label>
+                </div>
+                <div class="custom-control form-check col-6">
+                  <input type="checkbox" class="form-check-input" formControlName="thursdayChk" id="thursdayChk">
+                  <label class="form-check-label" for="thursdayChk">Thursday</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="custom-control form-check col-6">
+                  <input type="checkbox" class="form-check-input" formControlName="mondayChk" id="mondayChk">
+                  <label class="form-check-label" for="mondayChk">Monday</label>
+                </div>
+                <div class="custom-control form-check col-6">
+                  <input type="checkbox" class="form-check-input" formControlName="fridayChk" id="fridayChk">
+                  <label class="form-check-label" for="fridayChk">Friday</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="custom-control form-check col-6">
+                  <input type="checkbox" class="form-check-input" formControlName="tuesdayChk" id="tuesdayChk">
+                  <label class="form-check-label" for="tuesdayChk">Tuesday</label>
+                </div>
+                <div class="custom-control form-check col-6">
+                  <input type="checkbox" class="form-check-input" formControlName="saturdayChk" id="saturdayChk">
+                  <label class="form-check-label" for="saturdayChk">Saturday</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="custom-control form-check">
+                  <input type="checkbox" class="form-check-input" formControlName="wednesdayChk" id="wednesdayChk">
+                  <label class="form-check-label" for="wednesdayChk">Wednesday</label>
+                </div>
+              </div>
+
+              <span  *ngIf="isValidField('daysCheckboxGroup')" class="form-text text-danger">
+                At least one day is required to check.
+              </span>
+            </div>
+
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info styleClose" data-bs-dismiss="modal" (click)="onCancel()">Close</button>
+        <button type="submit" class="btn btn-info styleSave">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>

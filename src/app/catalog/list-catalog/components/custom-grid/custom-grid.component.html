@@ -1,0 +1,23 @@
+<table class="table table-striped table-light">
+  <thead>
+    <tr>
+      <th scope="col">Course</th>
+      <th scope="col">Professor</th>
+      <th scope="col">Room Number</th>
+      <th scope="col">Days</th>
+      <th scope="col" class="col-1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of list">
+      <td>{{item.name}}</td>
+      <td>{{item.professor.name}}</td>
+      <td>{{item.roomNumber}}</td>
+      <td>{{getDaysText(item.days) | titlecase}}</td>
+      <td>
+        <a (click)="editCourse(item)" class="btn btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
+        <a (click)="onDelete(item.id)" class="btn btn-sm"><i class="fa-solid fa-trash"></i></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
