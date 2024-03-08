@@ -1,4 +1,4 @@
- import { Component, OnInit, ViewChild } from '@angular/core';
+ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ICourse } from '../../interfaces/course-interface';
 import { CatalogService } from '../catalog.service';
 
@@ -9,7 +9,7 @@ import { CatalogService } from '../catalog.service';
 })
 export class ListCatalogComponent implements OnInit {
 
-  @ViewChild('courseModal') courseModal: any;
+  @ViewChild('courseModalBtn') element!: ElementRef;
 
   courses : ICourse[] =[];
   constructor(private catalogService :CatalogService){}
@@ -20,9 +20,9 @@ export class ListCatalogComponent implements OnInit {
   }
 
   openEditModal(course: ICourse){
-   // const element = document.getElementById("courseModalBtn") as HTMLButtonElement;
-    //element.click();
-    this.courseModal.modal('show');
+
+    this.element.nativeElement.click();
+
     this.selectedCourseToEdit = course;
   }
 
