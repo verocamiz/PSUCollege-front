@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ICourse } from '../../../../interfaces/course-interface';
 import { IDays } from '../../../../interfaces/days-interface';
 import { CatalogService } from '../../../catalog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'custom-modal',
@@ -30,17 +31,23 @@ export class CustomModalComponent implements OnChanges{
   });
   @Input() selectedCourse!: ICourse;
 
+  @ViewChild('closeModalBtn') element!: ElementRef;
+
   ngOnChanges(changes:SimpleChanges){
     // console.log(changes["selectedCourse"]);
 
-    this.form.controls['courseName'].setValue(this.selectedCourse.name);
-    this.form.controls['roomNumber'].setValue(this.selectedCourse.roomNumber);
-    this.form.controls['professorName'].setValue(this.selectedCourse.professor.name);
-    this.form.controls['professorEmail'].setValue(this.selectedCourse.professor.email);
+    if(changes["selectedCourse"]){
+      this.form.controls['courseName'].setValue(this.selectedCourse?.name);
+      this.form.controls['roomNumber'].setValue(this.selectedCourse?.roomNumber);
+      this.form.controls['professorName'].setValue(this.selectedCourse?.professor?.name);
+      this.form.controls['professorEmail'].setValue(this.selectedCourse?.professor?.email);
+    }
+
+
     // this.form.get('daysCheckboxGroup')["sundayChk"]
   }
 
-  constructor(private fb: FormBuilder, private service: CatalogService) { }
+  constructor(private fb: FormBuilder, private service: CatalogService, private toastr: ToastrService) { }
 
   onSave(): void {
     if (this.form.invalid) {
@@ -63,12 +70,10 @@ export class CustomModalComponent implements OnChanges{
     if (!this.selectedCourse.id) {
       this.service.insertCourse(model).subscribe({
         next: res => {
-          //toast
+          this.toastr.success('The course was created succesfully.');
+          this.element.nativeElement.click();
         },
-        error: error => console.error(error),
-        complete: () => {
-          //cerrar modal y refetch
-        }
+        error: error =>  this.toastr.error('Error while trying to complete the operation.'),
       });
     } else {
       model.id = this.selectedCourse.id!,
@@ -122,6 +127,9 @@ export class CustomModalComponent implements OnChanges{
 
   onCancel(): void {
     this.form.reset();
+
+    // this.toastr.success('Hello world!', 'Toastr fun!');
+
   }
 
   isValidField(field: string): boolean | null {

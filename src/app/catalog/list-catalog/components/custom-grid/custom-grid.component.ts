@@ -21,7 +21,7 @@ export class CustomGridComponent {
     let text = '';
 
     for (var key in days) {
-      if (days.hasOwnProperty(key)) {
+      if (days.hasOwnProperty(key) && days[key as keyof IDays]) {
         text += key.slice(0,3) + ' ';
       }
     }

@@ -5,7 +5,7 @@ export interface ICourse {
   id: number;
   name: string;
   professor: IProfessor;
-  roomNumber: number;
+  roomNumber: string;
   days : IDays;
   listDays? : string;
 }
