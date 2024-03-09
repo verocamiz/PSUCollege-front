@@ -1,7 +1,8 @@
-import { Component, Input, Output, input, EventEmitter } from '@angular/core';
+import { Component, Input, Output, input, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ICourse } from '../../../../interfaces/course-interface';
 import { IDays } from '../../../../interfaces/days-interface';
 import { CatalogService } from '../../../catalog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'custom-grid',
@@ -11,11 +12,18 @@ import { CatalogService } from '../../../catalog.service';
 export class CustomGridComponent {
 
   @Input()
-  list : ICourse[] =[];
+  list : ICourse[] | null =[];
 
   @Output() selectCourseToEdit = new EventEmitter<ICourse>();
 
-  constructor(private service: CatalogService){}
+  @ViewChild('deleteModalBtn') element!: ElementRef;
+
+  @Output()
+  public onDeletedCourse : EventEmitter<boolean> = new EventEmitter();
+
+  courseID : number = -1;
+
+  constructor(private catalogService: CatalogService,private toastr: ToastrService){}
 
   getDaysText(days:IDays): string{
     let text = '';
@@ -29,19 +37,23 @@ export class CustomGridComponent {
     return text;
   }
 
-  onDelete(id:number){
-    this.service.deleteCourse(id).subscribe({
+  onDelete(){
+    this.catalogService.deleteCourse(this.courseID).subscribe({
       next: res => {
-        //toast
+        this.onDeletedCourse.emit(true);
+        this.toastr.success('The course was deleted succesfully.');
+        this.element.nativeElement.click();
       },
-      error: error => console.error(error),
-      complete: () => {
-        //cerrar modal y refetch
-      }
+      error: error =>  this.toastr.error('Error while trying to complete the operation.')
     });
   }
 
   editCourse(course: ICourse){
     this.selectCourseToEdit.emit(course);
+    this.setCourseID(course);
+  }
+
+  setCourseID(item:ICourse){
+    this.courseID = item.id;
   }
 }

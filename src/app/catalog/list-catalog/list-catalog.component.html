@@ -10,13 +10,13 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <custom-grid [list]="courses" (selectCourseToEdit)="openEditModal($event)"></custom-grid>
+      <custom-grid [list]="courses | async" (selectCourseToEdit)="openEditModal($event)" (onDeletedCourse)="getCourses()"></custom-grid>
     </div>
   </div>
 </div>
 
 
 <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <custom-modal [selectedCourse]="selectedCourseToEdit"></custom-modal>
+   <custom-modal [selectedCourse]="selectedCourseToEdit" (onModifiedCourse)="getCourses()"></custom-modal>
 </div>
 

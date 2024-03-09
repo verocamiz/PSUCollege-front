@@ -10,14 +10,22 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of list">
-      <td>{{item.name}}</td>
+      <td >{{item.name}}</td>
       <td>{{item.professor.name}}</td>
       <td>{{item.roomNumber}}</td>
       <td>{{getDaysText(item.days) | titlecase}}</td>
       <td>
         <a (click)="editCourse(item)" class="btn btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-        <a (click)="onDelete(item.id)" class="btn btn-sm"><i class="fa-solid fa-trash"></i></a>
+        <a  class="btn btn-sm" (click)="setCourseID(item)" data-bs-toggle="modal" data-bs-target="#deleteModal" #deleteModalBtn><i class="fa-solid fa-trash"></i></a>
       </td>
+
+
+      <td colspan="5" class="text-center" *ngIf="list?.length == 0"> No results</td>
     </tr>
   </tbody>
 </table>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <delete-modal (onDeleteCourse)="onDelete()"></delete-modal>
+</div>

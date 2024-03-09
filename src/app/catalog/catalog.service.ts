@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environments } from '../../environments';
 import { ICourse } from '../interfaces/course-interface';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,11 @@ export class CatalogService {
 
   private baseUrl: string = environments.baseUrl;
 
+  constructor(private http : HttpClient) {
+  // this.courses$;
+  }
 
-  constructor(private http : HttpClient) { }
-
-  getCourses():Observable<ICourse[]> {
+  get courses$() {
     return this.http.get<ICourse[]>(`${ this.baseUrl }/CourseCatalog`);
   }
 
