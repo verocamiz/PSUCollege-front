@@ -25,17 +25,6 @@ export class CustomGridComponent {
 
   constructor(private catalogService: CatalogService,private toastr: ToastrService){}
 
-  getDaysText(days:IDays): string{
-    let text = '';
-
-    for (var key in days) {
-      if (days.hasOwnProperty(key) && days[key as keyof IDays]) {
-        text += key.slice(0,3) + ' ';
-      }
-    }
-
-    return text;
-  }
 
   onDelete(){
     this.catalogService.deleteCourse(this.courseID).subscribe({
@@ -55,5 +44,17 @@ export class CustomGridComponent {
 
   setCourseID(item:ICourse){
     this.courseID = item.id;
+  }
+
+  getDaysText(days:IDays): string{
+    let text = '';
+
+    for (var key in days) {
+      if (days.hasOwnProperty(key) && days[key as keyof IDays]) {
+        text += key.slice(0,3) + ' ';
+      }
+    }
+
+    return text;
   }
 }

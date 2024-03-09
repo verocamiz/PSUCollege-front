@@ -11,7 +11,8 @@
   <tbody>
     <tr *ngFor="let item of list">
       <td >{{item.name}}</td>
-      <td>{{item.professor.name}}</td>
+      <td *ngIf="item.professor.email; else noEmailProfessor"><a href="mailto:{{item.professor.email}}">{{item.professor.name}}</a></td>
+      <ng-template  #noEmailProfessor><td>{{item.professor.name}}</td></ng-template>
       <td>{{item.roomNumber}}</td>
       <td>{{getDaysText(item.days) | titlecase}}</td>
       <td>

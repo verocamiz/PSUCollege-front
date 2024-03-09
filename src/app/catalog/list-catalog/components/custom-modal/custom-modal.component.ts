@@ -38,10 +38,22 @@ export class CustomModalComponent implements OnChanges{
 
   ngOnChanges(changes:SimpleChanges){
     if(changes["selectedCourse"]){
-      this.form.controls['courseName'].setValue(this.selectedCourse?.name);
-      this.form.controls['roomNumber'].setValue(this.selectedCourse?.roomNumber);
-      this.form.controls['professorName'].setValue(this.selectedCourse?.professor?.name);
-      this.form.controls['professorEmail'].setValue(this.selectedCourse?.professor?.email);
+      this.form.patchValue({
+        courseName : this.selectedCourse?.name,
+        roomNumber : this.selectedCourse?.roomNumber,
+        professorName : this.selectedCourse?.professor?.name,
+        professorEmail : this.selectedCourse?.professor?.email,
+        daysCheckboxGroup :
+            {
+            sundayChk: this.selectedCourse?.days.sunday,
+            thursdayChk: this.selectedCourse?.days.thursday,
+            mondayChk: this.selectedCourse?.days.monday,
+            fridayChk: this.selectedCourse?.days.friday,
+            tuesdayChk: this.selectedCourse?.days.tuesday,
+            saturdayChk: this.selectedCourse?.days.saturday,
+            wednesdayChk: this.selectedCourse?.days.wednesday,
+           }
+      });
     }
   }
 
