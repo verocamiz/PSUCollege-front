@@ -6,11 +6,12 @@ import { CustomGridComponent } from './list-catalog/components/custom-grid/custo
 import { CustomModalComponent } from './list-catalog/components/custom-modal/custom-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteModalComponent } from './list-catalog/components/delete-modal/delete-modal.component';
+import { TBDPipe } from '../pipes/tbd.pipe';
 
 
 
 @NgModule({
-  declarations: [ListCatalogComponent, CustomGridComponent, CustomModalComponent,DeleteModalComponent],
+  declarations: [ListCatalogComponent, CustomGridComponent, CustomModalComponent,DeleteModalComponent, TBDPipe],
   imports: [
     CommonModule,
     CatalogRoutingModule,

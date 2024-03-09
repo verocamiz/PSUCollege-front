@@ -17,6 +17,6 @@
 
 
 <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-   <custom-modal [selectedCourse]="selectedCourseToEdit" (onModifiedCourse)="getCourses()"></custom-modal>
+   <custom-modal [form]="form" (onSaveCourse)="onSave()"></custom-modal>
 </div>
 

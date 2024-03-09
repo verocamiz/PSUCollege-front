@@ -12,8 +12,8 @@
     <tr *ngFor="let item of list">
       <td >{{item.name}}</td>
       <td *ngIf="item.professor.email; else noEmailProfessor"><a href="mailto:{{item.professor.email}}">{{item.professor.name}}</a></td>
-      <ng-template  #noEmailProfessor><td>{{item.professor.name}}</td></ng-template>
-      <td>{{item.roomNumber}}</td>
+      <ng-template  #noEmailProfessor><td>{{item.professor.name | TBD}}</td></ng-template>
+      <td>{{item.roomNumber | TBD}}</td>
       <td>{{getDaysText(item.days) | titlecase}}</td>
       <td>
         <a (click)="editCourse(item)" class="btn btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
