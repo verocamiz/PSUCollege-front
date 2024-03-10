@@ -94,7 +94,7 @@ export class ListCatalogComponent implements OnInit {
         next: res => {
           this.getCourses();
           this.toastr.success('The course was created succesfully.');
-          this.element.nativeElement.click();
+         this.element.nativeElement.click();
         },
         error: error =>  this.toastr.error('Error while trying to complete the operation.'),
       });
@@ -103,8 +103,8 @@ export class ListCatalogComponent implements OnInit {
       model.professor.id = this.selectedCourse.professor.id!
       this.catalogService.updateCourse(model).subscribe({
         next: res => {
-          this.getCourses();
-          this.element.nativeElement.click();
+         this.getCourses();
+         this.element.nativeElement.click();
           this.toastr.success("The course was edited succesfully.")
         },
         error: error => this.toastr.error('Error while trying to complete the operation.'),
@@ -112,6 +112,8 @@ export class ListCatalogComponent implements OnInit {
           this.selectedCourse = {
             id : -1,
           } as ICourse;
+
+          this.form.reset();
         }
       });
     }
