@@ -12,8 +12,8 @@
             <div class="col-4">
               <div class="mb-2">
                 <label class="form-label">Course Name</label>
-                <input type="text" class="form-control" formControlName="courseName">
-                <span *ngIf="isValidField('courseName')" class="form-text text-danger">
+                <input type="text" class="form-control" formControlName="courseName" [ngClass]="isValidField('courseName') ? 'input-error':''">
+                <span *ngIf="isValidField('courseName')" class="form-text text-danger" >
                   Course Name is required.
                 </span>
               </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="mb-2">
               <label  class="form-label">Professor Email</label>
-              <input type="email" class="form-control" formControlName="professorEmail">
+              <input type="email" class="form-control" formControlName="professorEmail" [ngClass]="isValidField('professorEmail') ? 'input-error':''">
               <span *ngIf="isValidField('professorEmail')" class="form-text text-danger">
                 Invalid email.
               </span>

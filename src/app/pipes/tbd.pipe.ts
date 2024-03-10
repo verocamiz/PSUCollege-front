@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TBDPipe implements PipeTransform{
     transform(text: string) : string {
-        if(text == null || text.length == 0){
+        if(!text || text.length == 0){
           return 'TBD';
         }
         return text;
