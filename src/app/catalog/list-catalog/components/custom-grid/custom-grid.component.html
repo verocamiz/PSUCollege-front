@@ -19,9 +19,9 @@
         <a (click)="editCourse(item)" class="btn btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
         <a  class="btn btn-sm" (click)="setCourseID(item)" data-bs-toggle="modal" data-bs-target="#deleteModal" #deleteModalBtn><i class="fa-solid fa-trash"></i></a>
       </td>
-
-
-      <td colspan="5" class="text-center" *ngIf="list?.length == 0"> No results</td>
+    </tr>
+    <tr *ngIf="list?.length == 0">
+      <td colspan="5" class="text-center" > No results</td>
     </tr>
   </tbody>
 </table>
